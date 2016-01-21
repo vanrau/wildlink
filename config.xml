@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+		xmlns:android   = "http://schemas.android.com/apk/res/android"
+        id          = "com.maestrocore.wildlink"
+        versionCode = "1" 
+        version     = "1.2.0" >
+
+
+    <name>Wildlink</name>
+
+    <description>
+        Wildlink 
+    </description>
+
+    <author href="http://www.wildlink.co.za" email="info@wildlink.co.za">
+        Gerhard van der Merwe 
+    </author>
+	
+	<content src="index.html" />
+	
+	<gap:platform name="android" />
+	
+	<preference name="EnableViewportScale" value="true"/>
+	
+	<supports-screens android:anyDensity="true" android:resizeable="true" 
+    android:smallScreens="true" 
+    android:normalScreens="true" 
+    android:largeScreens="true" 
+    android:xlargeScreens="true" />
+	
+	<access origin="*"/>
+	<icon src="icon.png" />
+	<plugin name="org.apache.cordova.dialogs" spec="0.2.4" />
+    <plugin name="org.apache.cordova.geolocation" spec="0.3.12" />
+    <plugin name="org.apache.cordova.inappbrowser" spec="0.6.0" />
+    <plugin name="org.apache.cordova.network-information" spec="0.2.15" />
+
+
+</widget>
