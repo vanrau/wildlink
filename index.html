@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=2, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <head>
+    <title>WildLink</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+	
+
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Global InAppBrowser reference
+    var iabRef = null;
+
+    function iabLoadStart(event) {
+       navigator.notification.activityStart("Loading", "");
+    }
+
+    function iabLoadStop(event) {
+        navigator.notification.activityStop();
+    }
+
+    function iabLoadError(event) {
+        alert("Error Loading page, check your connection. "+event.type + ' - ' + event.message);
+    }
+
+    function iabClose(event) {
+         //alert(event.type);
+         iabRef.removeEventListener('loadstart', iabLoadStart);
+         iabRef.removeEventListener('loadstop', iabLoadStop);
+         iabRef.removeEventListener('loaderror', iabLoadError);
+         iabRef.removeEventListener('exit', iabClose);
+		 navigator.app.exitApp();
+    }
+
+    // device APIs are available
+    //
+function onDeviceReady()
+{
+            checkConnection();
+                } 
+    function checkConnection() {
+            var networkState = navigator.connection.type;
+
+            var states = {};
+            states[Connection.UNKNOWN]  = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI]     = 'WiFi connection';
+            states[Connection.CELL_2G]  = 'Cell 2G connection';
+            states[Connection.CELL_3G]  = 'Cell 3G connection';
+            states[Connection.CELL_4G]  = 'Cell 4G connection';
+            states[Connection.NONE]     = 'No network connection';
+        if(states[networkState]==states[Connection.NONE])
+            {
+				alert('No Internet Connection! Please Turn on Wifi or Mobile Data to use this application');
+				navigator.app.exitApp();
+			
+			}
+		else
+		{
+		   setTimeout(function()
+		   { 
+		     loadsite();
+		   }, 3000);
+		   
+		}
+}	
+
+function loadsite(){
+	  iabRef = window.open('http://www.wildlink.co.za', '_self', 'location=no,hardwareback=yes,zoom=yes');
+	  iabRef.addEventListener('loadstart', iabLoadStart);
+	  iabRef.addEventListener('loadstop', iabLoadStop);
+	  iabRef.addEventListener('loaderror', iabLoadError);
+	  iabRef.addEventListener('exit', iabClose);	
+}
+
+    </script>
+  </head>
+  <body>
+  <div class="app">     
+            <div id="deviceready" class="blink">
+                <p class="event listening">The Link To Your Game...</p>
+                <p class="event received">The Link To Your Game...</p>
+            </div>
+   </div>
+  </body>
+</html>
